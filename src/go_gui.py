@@ -4,13 +4,14 @@ from .go_game import GoGame
 from .go_nn import GoNeuralNetwork
 from .mcts import MCTS
 
+
 class GoGUI:
     def __init__(self, master):
         self.master = master
         self.master.geometry("400x400")
         self.canvas = tk.Canvas(self.master, width=400, height=400)
         self.canvas.pack()
-        
+
         # Create Go board
         self.board_size = 19
         self.cell_size = 20
@@ -40,7 +41,11 @@ class GoGUI:
             best_action_B = self.agent_B.get_best_action()
             if best_action_B is not None and self.go_game.is_valid_move(*best_action_B):
                 self.go_game.place_stone(best_action_B[0], best_action_B[1])
-            self.draw_move(best_action_B[0], best_action_B[1], "black" if self.go_game.current_player == 'B' else "white")
+            self.draw_move(
+                best_action_B[0],
+                best_action_B[1],
+                "black" if self.go_game.current_player == "B" else "white",
+            )
             self.master.update()
             if self.go_game.is_game_over():
                 break
@@ -49,5 +54,9 @@ class GoGUI:
             best_action_W = self.agent_W.get_best_action()
             if best_action_W is not None and self.go_game.is_valid_move(*best_action_B):
                 self.go_game.place_stone(best_action_W[0], best_action_W[1])
-            self.draw_move(best_action_W[0], best_action_W[1], "black" if self.go_game.current_player == 'B' else "white")
+            self.draw_move(
+                best_action_W[0],
+                best_action_W[1],
+                "black" if self.go_game.current_player == "B" else "white",
+            )
             self.master.update()

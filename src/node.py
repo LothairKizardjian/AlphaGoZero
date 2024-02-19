@@ -1,5 +1,7 @@
 import math
+
 import numpy as np
+
 
 class Node:
     def __init__(self, state, parent=None):
@@ -18,12 +20,14 @@ class Node:
 
     def select_child(self):
         # Select a child node based on UCT (Upper Confidence Bound applied to Trees) formula
-        max_uct = -float('inf')
+        max_uct = -float("inf")
         selected_child = None
         for child in self.children:
             if child.visits == 0:
                 return child
-            uct = child.value / child.visits + math.sqrt(2 * math.log(self.visits) / child.visits)
+            uct = child.value / child.visits + math.sqrt(
+                2 * math.log(self.visits) / child.visits
+            )
             if uct > max_uct:
                 max_uct = uct
                 selected_child = child

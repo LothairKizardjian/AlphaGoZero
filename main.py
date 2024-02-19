@@ -3,6 +3,7 @@ import threading
 
 from src import GoGUI
 
+
 def main():
     root = tk.Tk()
     root.title("Go Game")
@@ -12,6 +13,7 @@ def main():
     game_thread.start()
 
     root.mainloop()
+
 
 if __name__ == "__main__":
     main()

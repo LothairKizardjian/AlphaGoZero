@@ -1,16 +1,17 @@
 class GoGame:
     def __init__(self, size=19):
         self.size = size
-        self.board = [[' ' for _ in range(size)] for _ in range(size)]
-        self.current_player = 'B'
-        self.opponent = 'W'
+        self.board = [[0 for _ in range(size)] for _ in range(size)]
+        self.current_player = 1
+        self.opponent = -1
         self.pass_count = 0  # Track consecutive passes
+        self.last_action = None
 
     def is_valid_move(self, row, col):
-        return self.board[row][col] == ' '
+        return self.board[row][col] == 0
 
     def place_stone(self, row, col):
-        if self.board[row][col] != ' ':
+        if not self.is_valid_move:
             return False
         self.board[row][col] = self.current_player
         self.current_player, self.opponent = self.opponent, self.current_player
@@ -30,7 +31,7 @@ class GoGame:
     def no_empty_positions(self):
         for row in range(self.size):
             for col in range(self.size):
-                if self.board[row][col] == ' ':
+                if self.board[row][col] == " ":
                     return False
         return True
 
@@ -38,7 +39,7 @@ class GoGame:
         actions = []
         for row in range(self.size):
             for col in range(self.size):
-                if self.board[row][col] == ' ':
+                if self.board[row][col] == " ":
                     actions.append((row, col))
         return actions
 
